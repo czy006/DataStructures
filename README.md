@@ -14,6 +14,8 @@ DataStructures -- 父项目，公共依赖
 │  │  ├─atguigu -- 【Java】数据结构与算法视频学习
 │  │  │  ├─sparsearray -- 稀疏数组案例
 │  │  │  ├─queue -- 队列案例
+│  │  │  ├─linkedlist -- 链表案例
 │  │  ├─leetcode -- leetcode刷题目录
+│  │  ├─xiaoma -- 【Java】小码哥数据算法
 
 ```
