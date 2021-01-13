@@ -12,7 +12,10 @@ public class BinarySearch {
     public static void main(String[] args) {
         int[] arr = new int[]{16,42,62,17,49,3,11,2341,323,231,634};
         int target = 323;
-        System.out.printf("目标数值 %d 的下标 => %d",target,binarySearch(arr,target));
+        System.out.printf("目标数值 %d 的下标 => %d \n",target,binarySearch(arr,target));
+
+        int result = binarySearch(arr, target, 0, arr.length - 1);
+        System.out.printf("目标数值 %d 的下标 => %d",target,result);
     }
 
     /**
@@ -46,5 +49,29 @@ public class BinarySearch {
             }
         }
         return result;
+    }
+
+    /**
+     * 递归查询 二分查找法
+     *
+     * @param search 需要查找的数组
+     * @param key 需要查找的key
+     * @param fromIndex 开始查找的下标
+     * @param toIndex 结束查找下标
+     * @return 查找到返回下标值
+     */
+    public static int binarySearch(int[] search,int key, int fromIndex, int toIndex){
+        if (key < search[fromIndex] || key > search[toIndex] || fromIndex > toIndex) return -1;
+        //寻找中间值
+        int mid = (fromIndex + toIndex) / 2;
+        // 如果找出的下标数值 < 目标数值的key 则继续查找下去 ，开始位前移，末尾不变
+        if (search[mid] < key){
+            return binarySearch(search, key, mid + 1, toIndex);
+            // 如果找出的下标数值 > 目标数值的key 则继续查找下去 ，开始位不变，末尾向前移
+        } else if (search[mid] > key){
+            return binarySearch(search, key, fromIndex, mid -1);
+        } else {
+            return mid;
+        }
     }
 }
