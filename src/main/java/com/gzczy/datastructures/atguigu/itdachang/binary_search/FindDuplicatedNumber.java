@@ -103,7 +103,7 @@ public class FindDuplicatedNumber {
 
     /**
      * 方法五：快慢指针法（循环检测）
-     *
+     *  slow走一步 fast 走两步
      * @param arr
      * @return
      */
