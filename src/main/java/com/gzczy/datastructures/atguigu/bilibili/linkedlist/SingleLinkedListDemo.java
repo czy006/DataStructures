@@ -1,4 +1,4 @@
-package com.gzczy.datastructures.atguigu.linkedlist;
+package com.gzczy.datastructures.atguigu.bilibili.linkedlist;
 
 import java.util.Stack;
 

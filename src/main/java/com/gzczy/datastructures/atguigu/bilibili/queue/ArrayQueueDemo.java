@@ -1,16 +1,16 @@
-package com.gzczy.datastructures.atguigu.queue;
+package com.gzczy.datastructures.atguigu.bilibili.queue;
 
 import java.util.Scanner;
 
 /**
- * @Description 环形队列
+ * @Description 数组队列demo
  * @Author chenzhengyu
- * @Date 2020-11-15 10:26
+ * @Date 2020-11-15 08:59
  */
-public class CircleArrayQueueDemo {
+public class ArrayQueueDemo {
 
     public static void main(String[] args) {
-        CircleArrayQueue queue = new CircleArrayQueue(3);
+        ArrayQueue queue = new ArrayQueue(3);
         char key = ' '; //接收用户输入
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
@@ -58,28 +58,32 @@ public class CircleArrayQueueDemo {
 
 }
 
-class CircleArrayQueue {
+class ArrayQueue {
 
     private int[] array;
     private int maxSize;
-    //头部
+    //队列头
     private int front;
-    //尾部
+    //队列尾
     private int rear;
 
-    public CircleArrayQueue(int maxSize) {
+    public ArrayQueue(int maxSize) {
         this.maxSize = maxSize;
         array = new int[maxSize];
+        // 指向队列头部，分析出 front 是指向队列头的前一个位置
+        front = -1;
+        // 指向队列尾，指向队列尾的数据(即就是队列最后一个数据)
+        rear = -1;
     }
 
     /**
      * 判断队列是否已满
-     * （尾部下标 + 1）% 最大存储量 = 头部
      *
      * @return
      */
     public boolean isFull() {
-        return (rear + 1) % maxSize == front;
+        // 数组下标是从0开始 所以需要 -1
+        return rear == maxSize - 1;
     }
 
     /**
@@ -98,13 +102,10 @@ class CircleArrayQueue {
      */
     public void addQueue(int data) {
         if (isFull()) {
-            System.out.println("队列已满!");
-            return;
+            throw new RuntimeException("队列已满!");
         }
-        //因为rear本身就指向后一个元素，所以直接赋值
+        rear++;
         array[rear] = data;
-        //将 rear 后移, 这里必须考虑取模，如果按照以前 ++ 数组越界
-        rear = (rear + 1) % maxSize;
     }
 
     /**
@@ -116,10 +117,8 @@ class CircleArrayQueue {
         if (isEmpty()) {
             throw new RuntimeException("队列为空!");
         }
-        //分析：需要将数据指向第一个元素，先把front取出做成一个临时变量，将front后移考虑取模，将临时变量保存返回
-        int result = array[front];
-        front = (front + 1) % maxSize;
-        return result;
+        front++;
+        return array[front];
     }
 
     /**
@@ -128,24 +127,11 @@ class CircleArrayQueue {
     public void showQueue() {
         if (isEmpty()) {
             System.out.println("队列为空！");
-            return;
+        } else {
+            for (int i = 0; i < array.length; i++) {
+                System.out.printf("arr[%d]=%d\n", i, array[i]);
+            }
         }
-        //思路：从front开始遍历，遍历多少个元素
-        for (int i = front; i < front + size(); i++) {
-            System.out.printf("arr[%d]=%d\n", i % maxSize, array[i % maxSize]);
-        }
-    }
-
-    /**
-     * 返回环形队列中有效的数据个数
-     *
-     * @return
-     */
-    public int size() {
-        // rear = 2
-        // front = 1
-        // maxSize = 3
-        return (rear + maxSize - front) % maxSize;
     }
 
     /**
@@ -157,6 +143,6 @@ class CircleArrayQueue {
         if (isEmpty()) {
             throw new RuntimeException("队列为空!");
         }
-        return array[front];
+        return array[front + 1];
     }
 }

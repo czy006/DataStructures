@@ -1,4 +1,4 @@
-package com.gzczy.datastructures.atguigu.stack;
+package com.gzczy.datastructures.atguigu.bilibili.stack;
 
 
 import java.util.Scanner;

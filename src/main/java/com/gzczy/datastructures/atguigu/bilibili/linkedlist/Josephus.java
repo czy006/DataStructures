@@ -1,4 +1,4 @@
-package com.gzczy.datastructures.atguigu.linkedlist;
+package com.gzczy.datastructures.atguigu.bilibili.linkedlist;
 
 import lombok.extern.slf4j.Slf4j;
 

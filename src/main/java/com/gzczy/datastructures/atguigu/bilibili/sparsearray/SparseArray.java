@@ -1,4 +1,4 @@
-package com.gzczy.datastructures.atguigu.sparsearray;
+package com.gzczy.datastructures.atguigu.bilibili.sparsearray;
 
 import java.io.*;
 import java.util.concurrent.TimeUnit;
