@@ -71,6 +71,7 @@ public class SingleNumber {
 
     /**
      * 方法四：异或运算（数学方法）
+     * https://zhuanlan.zhihu.com/p/43826007
      * @param nums
      * @return
      */
