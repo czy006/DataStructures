@@ -27,7 +27,7 @@ public class ReverseLinkedList {
 
     /**
      * 方法1：迭代
-     *
+     * 迭代是从前到后依次去遍历
      * @param head
      * @return
      */
@@ -55,7 +55,9 @@ public class ReverseLinkedList {
 
     /**
      * 方法二：递归
-     *
+     * 对于这道题目 我只考虑当前这个节点应该怎么做
+     * 有点像数学归纳法，假如说我们能在最简单的情形下返回一个结果 那么 我们能在更复杂场景下也可以返回结果
+     * 递归的顺序是从后到前，从前往后递归到最深的地方，然后执行过程是从后往前一个个执行 返回
      * @param head
      * @return
      */
@@ -68,6 +70,8 @@ public class ReverseLinkedList {
         temp.next = head;
         // 当前节点就是链表末尾，直接指向null
         head.next = null;
+        //Debug
+        //ListNode.printList(temp);
         return reverseNode;
     }
 }
