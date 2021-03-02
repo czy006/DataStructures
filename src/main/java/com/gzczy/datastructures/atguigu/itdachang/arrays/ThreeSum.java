@@ -13,11 +13,39 @@ import java.util.List;
 public class ThreeSum {
 
     public static void main(String[] args) {
-        int nums[] = {-1, 0, 1,1, 2, -1, -4};
+        int nums[] = {-1, 0, 1, 1, 2, -1, -4};
         System.out.println(threeSum2(nums));
     }
 
     /**
+     * 方法1：暴力法
+     * 缺点 时间复杂度为o（n的三次方）且无法去重
+     * 运算结果：[[-1, 0, 1], [-1, 0, 1], [-1, 2, -1], [0, 1, -1], [0, 1, -1]]
+     * @param nums
+     * @return
+     */
+    public static List<List<Integer>> threeSum(int[] nums) {
+        int n = nums.length;
+        List<List<Integer>> resultList = new ArrayList<>();
+        // 三重循环，遍历所有的三数组合
+        for (int i = 0; i < n - 2; i++) {
+            for (int j = i + 1; j < n - 1; j++) {
+                for (int k = j + 1; k < n; k++) {
+                    if (nums[i] + nums[j] + nums[k] == 0) {
+                        resultList.add(
+                                Arrays.asList(nums[i], nums[j], nums[k]));
+                    }
+                }
+            }
+        }
+        return resultList;
+    }
+
+    /**
+     * 方法二：双指针
+     * 时间复杂度 O(N^2)：其中固定指针k循环复杂度 O(N)，双指针 i，j 复杂度 O(N)。比暴力法的O(n^3)，显然有了很大的改善。
+     * 空间复杂度 O(1)：指针使用常数大小的额外空间
+     *
      * @param nums
      * @return
      */
@@ -36,7 +64,7 @@ public class ThreeSum {
             //2.3 定义左右指针
             //2.3.1 左指针 当前i的下标右面，因为前面的数已经曾今作为过核心了 故不用再次尝试
             int lp = i + 1;
-            //2.3.2 右指针 数组最大长度 - 1
+            //2.3.2 右指针 数组最大长度 - 1 注意这里是 n - 1
             int rp = n - 1;
             // 2.4 左指针和右指针进行比较 如果左指针小于右指针 左右指针重合，相交后都需要中断
             while (lp < rp) {
