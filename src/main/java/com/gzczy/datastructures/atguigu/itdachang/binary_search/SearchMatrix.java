@@ -13,24 +13,26 @@ public class SearchMatrix {
     }
 
     public static boolean searchMatrix(int[][] matrix, int target) {
-        //0、边界条件筛选
+        //0、边界条件筛选,m为行长度
         int m = matrix.length;
-        if (m == 0) return false;
 
+        if (m == 0) return false;
+        // n 为列长度
         int n = matrix[0].length;
+
         int left = 0;
         // 行 * 列 - 1 = 数据个数
         int right = m * n - 1;
-
+        //从头到尾开始二分查找
         while (left <= right) {
             //计算中间下标值
             int midIndex = (left + right) / 2;
+            //对于一维下标为idx的元素，对应二维数组中的坐标就应该是：row = idx / n;  col = idx % n;
             // 行
             int x = midIndex / n;
             // 列
             int y = midIndex % n;
             // 行列坐标为(row, col)的元素，展开之后索引下标为idx = row * n + col；
-            // 反过来，对于一维下标为idx的元素，对应二维数组中的坐标就应该是：row = idx / n;  col = idx % n;
             int midElement = matrix[x][y];
             // 如果当前元素 < 目标元素 ，证明需要 左面往中间（大的地方）靠一点
             if (midElement < target) {

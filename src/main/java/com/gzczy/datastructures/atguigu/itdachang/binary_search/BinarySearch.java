@@ -61,6 +61,7 @@ public class BinarySearch {
      * @return 查找到返回下标值
      */
     public static int binarySearch(int[] search,int key, int fromIndex, int toIndex){
+        //基本判断：当起始位置 > 结束位置时候 ，特殊情况：超出最大最小值，直接返回 -1
         if (key < search[fromIndex] || key > search[toIndex] || fromIndex > toIndex) return -1;
         //寻找中间值
         int mid = (fromIndex + toIndex) / 2;

@@ -52,9 +52,10 @@ public class FindDuplicatedNumber {
     }
 
     /**
-     * 方法三：二分查找
+     * 方法三：二分查找：查找 1-N的自然数列，寻找target
      * 数组里面最小数是1 ，最大数是n+1-1，这里是利用了一个小技巧，直接使用指针去做处理，然后返回的时候也是返回的指针
      * 这里的左右指针是鉴于元素进行特殊处理，而不是数组下标 这是需要注意的
+     *
      * @param arr
      * @return
      */
@@ -103,22 +104,27 @@ public class FindDuplicatedNumber {
 
     /**
      * 方法五：快慢指针法（循环检测）
-     *  slow走一步 fast 走两步
+     * slow走一步 fast 走两步
+     *
      * @param arr
      * @return
      */
     public static int findDuplicatedNumber(int[] arr) {
         // 定义快慢指针
-        int fast = 0,low =0;
-        // 第一阶段：寻找链表中的环
+        int fast = 0, low = 0;
+        // 第一阶段：寻找链表中的环，如果fast!=low就一直寻找下去
         do {
             low = arr[low];
+            //进行条件判读，如果取出值比 数组长度大 证明没有环，不用继续查找了
+            if (arr[fast] >= arr.length){
+                throw new RuntimeException("can't find data");
+            }
             fast = arr[arr[fast]];
-        }while (fast !=low);
-        System.out.println("fast==>"+fast+",low==>"+low);
-        // 第二阶段：寻找环在链上的入口节点
+        } while (fast != low);
+        System.out.println("fast==>" + fast + ",low==>" + low);
+        // 第二阶段：寻找环在链上的入口节点就是那个重复的数字
         int ptr1 = 0, ptr2 = low;
-        while (ptr1 != ptr2){
+        while (ptr1 != ptr2) {
             ptr1 = arr[ptr1];
             ptr2 = arr[ptr2];
         }
